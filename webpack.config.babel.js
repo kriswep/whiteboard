@@ -56,6 +56,9 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      global: {}, // bizarre  webpack workaround
+    }),
     // new webpack.optimize.UglifyJsPlugin({
     //   sourceMap: true,
     // }),
