@@ -1,0 +1,71 @@
+{
+  "name": "modern-modular-javascript",
+  "version": "2.0.0",
+  "description": "A modern and modular JavaScript boilerplate setup",
+  "main": "lib/server/index.js",
+  "author": "kriswep",
+  "license": "MIT",
+  "env": {
+    "browser": true
+  },
+  "scripts": {
+    "prebuild": "npm run lint && npm test && npm run cleanclient",
+    "build": "NODE_ENV=production webpack -p",
+    "cleanlib": "del lib",
+    "cleanclient": "del dist",
+    "coverage": "jest --coverage",
+    "coverage:watch": "jest --coverage --watch",
+    "precompile": "npm run lint && npm test && npm run cleanlib",
+    "compile": "babel --presets env --ignore **.spec.js -d lib/ src/",
+    "dev:server": "nodemon ./src/server/index.js --exec babel-node -e js",
+    "dev": "webpack-dev-server --inline",
+    "fulltest": "parallelshell \"npm run lint:watch\" \"npm run test:watch\"",
+    "lint": "eslint \"./src/server\"",
+    "lint:watch": "watch \"npm run lint\" ./src",
+    "prestart": "npm run compile && npm run build",
+    "start": "node lib/server/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "plugins": [
+      "import"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-jest": "^20.0.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.2.1",
+    "css-loader": "^0.28.0",
+    "del-cli": "^1.0.0",
+    "eslint": "^3.9.1",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.0.1",
+    "html-webpack-plugin": "^2.28.0",
+    "jest": "^20.0.1",
+    "nodemon": "^1.11.0",
+    "parallelshell": "^3.0.1",
+    "regenerator-runtime": "^0.10.3",
+    "style-loader": "^0.18.1",
+    "supertest": "^3.0.0",
+    "watch": "^1.0.1",
+    "webpack": "^2.2.1",
+    "webpack-bundle-analyzer": "^2.3.1",
+    "webpack-dev-server": "^2.4.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.16.0",
+    "cors": "^2.8.3",
+    "express": "^4.14.0",
+    "socket.io": "^2.0.3"
+  }
+}
