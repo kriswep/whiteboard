@@ -20,7 +20,7 @@
     "dev:server": "nodemon ./src/server/index.js --exec babel-node -e js",
     "dev": "webpack-dev-server --inline",
     "fulltest": "parallelshell \"npm run lint:watch\" \"npm run test:watch\"",
-    "lint": "eslint \"./src/server\"",
+    "lint": "eslint \"./src\"",
     "lint:watch": "watch \"npm run lint\" ./src",
     "prestart": "npm run compile && npm run build",
     "start": "node lib/server/index.js",
@@ -35,9 +35,7 @@
   },
   "eslintConfig": {
     "extends": "airbnb-base",
-    "plugins": [
-      "import"
-    ]
+    "plugins": ["import"]
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
@@ -66,6 +64,7 @@
     "babel-polyfill": "^6.16.0",
     "cors": "^2.8.3",
     "express": "^4.14.0",
-    "socket.io": "^2.0.3"
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3"
   }
 }

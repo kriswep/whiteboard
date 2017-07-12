@@ -1,4 +1,4 @@
-/* globals document window io */
+/* globals document window */
 import io from 'socket.io-client';
 
 import './app.css';
@@ -23,13 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // register mouse event handlers
   canvas.onmousedown = function (e) {
+    e.preventDefault();
     mouse.click = true;
   };
   canvas.onmouseup = function (e) {
+    e.preventDefault();
     mouse.click = false;
   };
 
   canvas.onmousemove = function (e) {
+    e.preventDefault();
     // normalize mouse position to range 0.0 - 1.0
     mouse.pos.x = e.clientX / width;
     mouse.pos.y = e.clientY / height;
