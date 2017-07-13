@@ -69,7 +69,7 @@ module.exports = {
     //   sourceMap: true,
     // }),
     new HtmlWebpackPlugin({
-      title: 'modern modular javascript',
+      title: 'Online Whiteboard',
       filename: 'index.html',
       template: 'template.html',
     }),
