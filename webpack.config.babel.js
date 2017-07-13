@@ -21,6 +21,12 @@ module.exports = {
     hot: false,
     inline: true,
     contentBase: BUILD_DIR,
+    proxy: {
+      '/socket.io': {
+        target: 'http://localhost:3000/socket.io',
+        secure: false,
+      },
+    },
   },
   module: {
     rules: [

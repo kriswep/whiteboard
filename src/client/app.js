@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const context = canvas.getContext('2d');
   const width = window.innerWidth;
   const height = window.innerHeight;
-  const socket = io.connect('http://localhost:3000');
+  // const socket = io.connect('http://localhost:3000');
+  const socket = io(window.location.origin);
 
   // set canvas to full browser width/height
   canvas.width = width;
@@ -46,6 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
     context.moveTo(line[0].x * width, line[0].y * height);
     context.lineTo(line[1].x * width, line[1].y * height);
     context.stroke();
+  });
+
+  socket.on('log', (data) => {
+    console.log(data.text);
   });
 
   // main loop, running every 25ms

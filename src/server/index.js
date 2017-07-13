@@ -42,6 +42,7 @@ io.on('connection', (socket) => {
     lines.push(data.line);
     // send line to all clients
     io.emit('draw_line', { line: data.line });
+    io.emit('log', { text: 'hoorray' });
   });
 });
 
