@@ -23,21 +23,33 @@ document.addEventListener('DOMContentLoaded', () => {
   canvas.height = height;
 
   // register mouse event handlers
-  canvas.onmousedown = function (e) {
+  canvas.onmousedown = (e) => {
     e.preventDefault();
     mouse.click = true;
+    mouse.pos_prev = false;
   };
-  canvas.onmouseup = function (e) {
+  canvas.onmouseup = (e) => {
     e.preventDefault();
     mouse.click = false;
+    mouse.pos_prev = false;
+  };
+  canvas.onmouseleave = (e) => {
+    e.preventDefault();
+    mouse.click = false;
+    mouse.pos_prev = false;
   };
 
-  canvas.onmousemove = function (e) {
+  canvas.onmousemove = (e) => {
     e.preventDefault();
     // normalize mouse position to range 0.0 - 1.0
     mouse.pos.x = e.clientX / width;
     mouse.pos.y = e.clientY / height;
-    mouse.move = true;
+    // is clicking, and was clicking before?
+    if (mouse.click && mouse.pos_prev) {
+      // send line to to the server
+      socket.emit('draw_line', { line: [mouse.pos, mouse.pos_prev] });
+    }
+    mouse.pos_prev = { x: mouse.pos.x, y: mouse.pos.y };
   };
 
   // draw line received from server
@@ -50,19 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   socket.on('log', (data) => {
+    // eslint-disable-next-line no-console
     console.log(data.text);
   });
-
-  // main loop, running every 25ms
-  function mainLoop() {
-    // check if the user is drawing
-    if (mouse.click && mouse.move && mouse.pos_prev) {
-      // send line to to the server
-      socket.emit('draw_line', { line: [mouse.pos, mouse.pos_prev] });
-      mouse.move = false;
-    }
-    mouse.pos_prev = { x: mouse.pos.x, y: mouse.pos.y };
-    setTimeout(mainLoop, 25);
-  }
-  mainLoop();
 });
