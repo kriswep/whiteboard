@@ -26,7 +26,12 @@
     "prestart": "npm run compile && npm run build",
     "start": "node lib/server/index.js",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "now-build": "echo 'build yourself'",
+    "now-start": "node lib/server/index.js"
+  },
+  "now": {
+    "alias": "whiteboard"
   },
   "jest": {
     "moduleNameMapper": {
