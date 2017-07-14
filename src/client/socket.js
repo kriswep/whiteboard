@@ -21,4 +21,4 @@ export const startSocket = (context, width, height) => {
 
 export const emitSocket = (evt, data, fn) => socket.emit(evt, data, fn);
 
-// export default startSocket;
+export const changeRoom = newRoom => emitSocket('switch_board', newRoom);

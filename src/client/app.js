@@ -1,5 +1,5 @@
-/* globals document window */
-import { startSocket } from './socket';
+/* globals document window location */
+import { startSocket, changeRoom } from './socket';
 import { startInput } from './input';
 
 import './app.css';
@@ -17,4 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // set canvas to full browser width/height
   canvas.width = width;
   canvas.height = height;
+
+  // go to inital room
+  changeRoom(location.hash);
+
+  // change room on hash change
+  window.onhashchange = () => {
+    // clear canvas
+    context.fillStyle = '#FFF';
+    context.fillRect(0, 0, width, height);
+    // change room
+    changeRoom(location.hash);
+  };
 });
