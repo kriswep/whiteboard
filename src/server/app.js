@@ -17,8 +17,9 @@ app.use(cors(corsOptions));
 app.use(express.static(path.resolve(__dirname, '../../dist')));
 
 // Handles all routes so you do not get a not found error
-app.get('*', (request, response) => {
+export function allRoutes(request, response) {
   response.sendFile(path.resolve(__dirname, '../../dist', 'index.html'));
-});
+}
+app.get('*', allRoutes);
 
 export default server;
