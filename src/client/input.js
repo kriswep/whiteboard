@@ -1,5 +1,6 @@
 import { emitSocket } from './socket';
 import { addListenerMulti } from './event';
+import { drawLine } from './draw';
 
 export const input = {
   active: false,
@@ -45,6 +46,8 @@ export const startInput = (canvas, width, height) => {
     input.pos.y = y / height;
     // valid click or touch, is active, and was clicking before?
     if (x >= 0 && y >= 0 && input.active && input.pos_prev) {
+      // draw locally
+      drawLine(canvas.getContext('2d'), width, height, [input.pos, input.pos_prev]);
       // send line to to the server
       emitSocket('draw_line', { line: [input.pos, input.pos_prev] });
     }

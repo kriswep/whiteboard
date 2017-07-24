@@ -1,6 +1,7 @@
 /* globals document window location */
 import { startSocket, changeRoom } from './socket';
 import { startInput } from './input';
+import { clearCanvas } from './draw';
 
 import './app.css';
 
@@ -24,8 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // change room on hash change
   window.onhashchange = () => {
     // clear canvas
-    context.fillStyle = '#FFF';
-    context.fillRect(0, 0, width, height);
+    clearCanvas(context, width, height);
     // change room
     changeRoom(location.hash);
   };
