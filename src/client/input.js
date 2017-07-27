@@ -6,6 +6,7 @@ export const input = {
   active: false,
   pos: { x: 0, y: 0 },
   pos_prev: false,
+  style: { color: '#000099', width: 2 },
 };
 
 export const startInput = (canvas, width, height) => {
@@ -47,9 +48,9 @@ export const startInput = (canvas, width, height) => {
     // valid click or touch, is active, and was clicking before?
     if (x >= 0 && y >= 0 && input.active && input.pos_prev) {
       // draw locally
-      drawLine(canvas.getContext('2d'), width, height, [input.pos, input.pos_prev]);
+      drawLine(canvas.getContext('2d'), width, height, [input.pos, input.pos_prev, input.style]);
       // send line to to the server
-      emitSocket('draw_line', { line: [input.pos, input.pos_prev] });
+      emitSocket('draw_line', { line: [input.pos, input.pos_prev, input.style] });
     }
     if (x >= 0 && y >= 0) {
       input.pos_prev = { x: input.pos.x, y: input.pos.y };
