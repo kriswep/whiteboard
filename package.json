@@ -16,7 +16,7 @@
     "coverage": "jest --coverage",
     "coverage:watch": "jest --coverage --watch",
     "precompile": "npm run lint && npm test && npm run cleanlib",
-    "compile": "babel --presets env --ignore **.spec.js,src/client/** -d lib/ src/",
+    "compile": "babel --presets env --ignore **.spec.js,src/client/**,src/**/__mocks__/** -d lib/ src/",
     "dev:server": "NODE_ENV=test nodemon ./src/server/index.js --exec babel-node -e js",
     "dev:client": "webpack-dev-server --inline",
     "dev": "parallelshell \"npm run dev:server\" \"npm run dev:client\"",
