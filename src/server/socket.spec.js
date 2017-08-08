@@ -1,5 +1,5 @@
 /* globals test expect jest */
-import { mockTo, mockOn } from 'socket.io';
+import { mockOn } from 'socket.io';
 import startIo, { linesToRoom } from './socket';
 
 test('socket should not smoke', () => {
